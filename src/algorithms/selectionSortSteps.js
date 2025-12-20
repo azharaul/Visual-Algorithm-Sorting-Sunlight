@@ -1,11 +1,13 @@
 export function generateSelectionSortSteps(inputArray) {
+    if (!inputArray || inputArray.length === 0) return [];
+
     const arr = [...inputArray];
     const steps = [];
 
     steps.push({
         type: "start",
         array: [...arr],
-        message: "Starting Selection Sort.",
+        message: { en: "Starting Selection Sort.", id: "Memulai Selection Sort." },
     });
 
     const n = arr.length;
@@ -18,7 +20,10 @@ export function generateSelectionSortSteps(inputArray) {
             i,
             minIndex,
             array: [...arr],
-            message: `Selecting index ${i} as initial minimum.`,
+            message: {
+                en: `Selecting index ${i} as initial minimum.`,
+                id: `Memilih indeks ${i} sebagai minimum awal.`
+            },
         });
 
         for (let j = i + 1; j < n; j++) {
@@ -28,7 +33,10 @@ export function generateSelectionSortSteps(inputArray) {
                 j,
                 minIndex,
                 array: [...arr],
-                message: `Comparing index ${j} with current minimum at index ${minIndex}.`,
+                message: {
+                    en: `Comparing index ${j} with current minimum at index ${minIndex}.`,
+                    id: `Membandingkan indeks ${j} dengan minimum saat ini di indeks ${minIndex}.`
+                },
             });
 
             if (arr[j] < arr[minIndex]) {
@@ -38,7 +46,10 @@ export function generateSelectionSortSteps(inputArray) {
                     i,
                     minIndex,
                     array: [...arr],
-                    message: `New minimum found at index ${minIndex}.`,
+                    message: {
+                        en: `New minimum found at index ${minIndex}.`,
+                        id: `Minimum baru ditemukan di indeks ${minIndex}.`
+                    },
                 });
             }
         }
@@ -51,14 +62,20 @@ export function generateSelectionSortSteps(inputArray) {
                 i,
                 minIndex,
                 array: [...arr],
-                message: `Swapping index ${i} with index ${minIndex}.`,
+                message: {
+                    en: `Swapping index ${i} with index ${minIndex}.`,
+                    id: `Menukar indeks ${i} dengan indeks ${minIndex}.`
+                },
             });
         } else {
             steps.push({
                 type: "noswap",
                 i,
                 array: [...arr],
-                message: `Index ${i} already has the minimum value.`,
+                message: {
+                    en: `Index ${i} already has the minimum value.`,
+                    id: `Indeks ${i} sudah memiliki nilai minimum.`
+                },
             });
         }
     }
@@ -66,7 +83,7 @@ export function generateSelectionSortSteps(inputArray) {
     steps.push({
         type: "done",
         array: [...arr],
-        message: "Selection Sort completed.",
+        message: { en: "Selection Sort completed.", id: "Selection Sort selesai." },
     });
 
     return steps;

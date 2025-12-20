@@ -18,7 +18,10 @@ export function generateQuickSortSteps(inputArray) {
             type: "pivot",
             array: [...arr],
             pivotIndex: high,
-            message: `Choosing pivot at index ${high} with value ${pivot}.`,
+            message: {
+                en: `Choosing pivot at index ${high} with value ${pivot}.`,
+                id: `Memilih pivot di indeks ${high} dengan nilai ${pivot}.`
+            },
         });
 
         for (let j = low; j < high; j++) {
@@ -27,7 +30,10 @@ export function generateQuickSortSteps(inputArray) {
                 array: [...arr],
                 i: j,
                 pivotIndex: high,
-                message: `Comparing index ${j} with pivot.`,
+                message: {
+                    en: `Comparing index ${j} with pivot.`,
+                    id: `Membandingkan indeks ${j} dengan pivot.`
+                },
             });
 
             if (arr[j] < pivot) {
@@ -39,7 +45,10 @@ export function generateQuickSortSteps(inputArray) {
                     i,
                     j,
                     pivotIndex: high,
-                    message: `Swapping index ${i} and ${j}.`,
+                    message: {
+                        en: `Swapping index ${i} and ${j}.`,
+                        id: `Menukar indeks ${i} dan ${j}.`
+                    },
                 });
             }
         }
@@ -49,7 +58,10 @@ export function generateQuickSortSteps(inputArray) {
             type: "pivot-swap",
             array: [...arr],
             pivotIndex: i + 1,
-            message: `Placing pivot at correct position ${i + 1}.`,
+            message: {
+                en: `Placing pivot at correct position ${i + 1}.`,
+                id: `Menempatkan pivot di posisi yang benar ${i + 1}.`
+            },
         });
 
         return i + 1;
@@ -58,7 +70,7 @@ export function generateQuickSortSteps(inputArray) {
     steps.push({
         type: "start",
         array: [...arr],
-        message: "Starting Quick Sort.",
+        message: { en: "Starting Quick Sort.", id: "Memulai Quick Sort." },
     });
 
     quickSortHelper(arr, 0, arr.length - 1);
@@ -66,7 +78,7 @@ export function generateQuickSortSteps(inputArray) {
     steps.push({
         type: "done",
         array: [...arr],
-        message: "Quick Sort completed.",
+        message: { en: "Quick Sort completed.", id: "Quick Sort selesai." },
     });
 
     return steps;

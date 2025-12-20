@@ -13,7 +13,10 @@ export function generateHeapSortSteps(inputArray) {
                 array: [...arr],
                 i: left,
                 largest,
-                message: `Comparing left child ${left} with root ${largest}.`,
+                message: {
+                    en: `Comparing left child ${left} with root ${largest}.`,
+                    id: `Membandingkan anak kiri ${left} dengan root ${largest}.`
+                },
             });
             if (arr[left] > arr[largest]) {
                 largest = left;
@@ -26,7 +29,10 @@ export function generateHeapSortSteps(inputArray) {
                 array: [...arr],
                 i: right,
                 largest,
-                message: `Comparing right child ${right} with largest ${largest}.`,
+                message: {
+                    en: `Comparing right child ${right} with largest ${largest}.`,
+                    id: `Membandingkan anak kanan ${right} dengan terbesar ${largest}.`
+                },
             });
             if (arr[right] > arr[largest]) {
                 largest = right;
@@ -40,7 +46,10 @@ export function generateHeapSortSteps(inputArray) {
                 array: [...arr],
                 i,
                 largest,
-                message: `Swapping root ${i} with largest ${largest}.`,
+                message: {
+                    en: `Swapping root ${i} with largest ${largest}.`,
+                    id: `Menukar root ${i} dengan terbesar ${largest}.`
+                },
             });
             heapify(arr, n, largest);
         }
@@ -49,7 +58,7 @@ export function generateHeapSortSteps(inputArray) {
     steps.push({
         type: "start",
         array: [...arr],
-        message: "Starting Heap Sort.",
+        message: { en: "Starting Heap Sort.", id: "Memulai Heap Sort." },
     });
 
     const n = arr.length;
@@ -62,7 +71,7 @@ export function generateHeapSortSteps(inputArray) {
     steps.push({
         type: "heap-built",
         array: [...arr],
-        message: "Max heap built.",
+        message: { en: "Max heap built.", id: "Max heap telah dibangun." },
     });
 
     // Extract elements from heap
@@ -72,7 +81,10 @@ export function generateHeapSortSteps(inputArray) {
             type: "extract",
             array: [...arr],
             i,
-            message: `Extracting max element to position ${i}.`,
+            message: {
+                en: `Extracting max element to position ${i}.`,
+                id: `Mengekstrak elemen maksimum ke posisi ${i}.`
+            },
         });
         heapify(arr, i, 0);
     }
@@ -80,7 +92,7 @@ export function generateHeapSortSteps(inputArray) {
     steps.push({
         type: "done",
         array: [...arr],
-        message: "Heap Sort completed.",
+        message: { en: "Heap Sort completed.", id: "Heap Sort selesai." },
     });
 
     return steps;
