@@ -8,59 +8,23 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
-# CORS Configuration - Professional Setup
-ALLOWED_ORIGINS = [
-    "https://sunlight.breakdownaz.my.id",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173"
-]
+# Initialize CharacterAI Client (Requires Token)
+# CARA MENGGUNAKAN AI:
+# 1. Dapatkan Token Character.ai Anda.
+# 2. Masukkan token di bawah ini (ganti string kosong) ATAU set environment variable CAI_TOKEN.
+#    Contoh: my_token = "e3412..."
+# 3. Masukkan Character ID (ID karakter yang ingin digunakan sebagai tutor).
 
-CORS(
-    app,
-    supports_credentials=True,
-    resources={r"/*": {"origins": ALLOWED_ORIGINS}}
-)
+# --- KONFIGURASI MANUAL (JKA PERLU) ---
+MANUAL_TOKEN = "1156934d72bd4942c096fbbc5ef2143f0081932f" # PASTE TOKEN DISINI JIKA TIDAK MAU PAKAI ENV
+MANUAL_CHAR_ID = "eWxQEIjF9r6nNjyQG2L5GsIpkD1J12nIbSPQIbKXNL0" # PASTE CHARACTER ID DISINI
+# --------------------------------------
 
-@app.after_request
-def after_request(response):
-    """Add CORS headers to all responses"""
-    origin = request.headers.get('Origin')
-    if origin in ALLOWED_ORIGINS:
-        response.headers.add('Access-Control-Allow-Origin', origin)
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response
+# Global variable to store active chat session
+GLOBAL_CHAT_ID = None
 
-# ============================================
-# Configuration from Environment Variables
-# ============================================
-CAI_TOKEN = os.environ.get("CAI_TOKEN")
-CAI_CHAR_ID = os.environ.get("CAI_CHAR_ID")
-FLASK_PORT = int(os.environ.get("FLASK_PORT", 5001))
-FLASK_DEBUG = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
-
-# ============================================
-# Health Check Endpoint
-# ============================================
-@app.route('/', methods=['GET'])
-def health_check():
-    """Health check endpoint for monitoring"""
-    return jsonify({
-        "status": "running",
-        "message": "SunBot AI Server is active!",
-        "version": "1.0.0"
-    })
-
-@app.route('/health', methods=['GET'])
-def health():
-    """Alternative health check"""
-    return jsonify({"status": "ok"})
-
-# ============================================
-# AI Integration
-# ============================================
 async def generate_ai_response(algorithm, step_data, user_message=None):
     """
     Generate AI explanation using Character.AI
