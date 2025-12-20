@@ -91,17 +91,17 @@ function App() {
     return (
         <div className="min-h-screen pt-6 sm:pt-8 md:pt-12 pb-32 sm:pb-36 md:pb-40 px-3 sm:px-4 md:px-8 flex flex-col items-center">
             {/* Header */}
-            <header className="w-full max-w-5xl mb-6 md:mb-8">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-2 md:mb-4
+            <header className="w-full max-w-5xl mb-4 md:mb-6">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-1
                 text-transparent bg-clip-text
-                bg-gradient-to-r from-blue-400 via-white to-purple-400
-                drop-shadow-[0_0_25px_rgba(255,255,255,0.6)]
-                leading-relaxed py-1">
+                bg-gradient-to-r from-blue-400 via-blue-200 to-purple-400
+                drop-shadow-[0_0_25px_rgba(255,255,255,0.4)]
+                leading-tight py-1">
                     {t('title')}
                 </h1>
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center leading-relaxed">
-                    <span className="text-white">{t('by')}</span>{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-200 to-orange-300 drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center leading-tight">
+                    <span className="text-slate-300">{t('by')}</span>{" "}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-200 to-orange-300 drop-shadow-[0_0_20px_rgba(250,204,21,0.6)]">
                         Sunlight
                     </span>
                 </h2>
