@@ -160,7 +160,11 @@ function App() {
         <div className="min-h-screen pt-6 sm:pt-8 md:pt-12 pb-32 sm:pb-36 md:pb-40 px-3 sm:px-4 md:px-8 flex flex-col items-center">
             {/* Header */}
             <header className="w-full max-w-5xl mb-6 md:mb-8">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-2 md:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white to-purple-300 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] leading-relaxed py-1">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-2 md:mb-4
+                text-transparent bg-clip-text
+                bg-gradient-to-r from-blue-400 via-white to-purple-400
+                drop-shadow-[0_0_25px_rgba(255,255,255,0.6)]
+                leading-relaxed py-1">
                     {t('title')}
                 </h1>
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center leading-relaxed">
