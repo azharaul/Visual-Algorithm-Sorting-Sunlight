@@ -23,7 +23,11 @@ const translations = {
         elements: 'Elements',
         current_operation: 'Current Operation',
         by: 'By',
-        switch_lang: 'Bahasa Indonesia'
+        switch_lang: 'Bahasa Indonesia',
+        waiting: 'Waiting for data...',
+        explanation: 'Explanation',
+        code_implementation: 'Code Implementation',
+        learn_more: 'Learn More'
     },
     id: {
         title: 'Visualisasi Algoritma Sorting',
@@ -47,7 +51,11 @@ const translations = {
         elements: 'Elemen',
         current_operation: 'Operasi Saat Ini',
         by: 'Oleh',
-        switch_lang: 'English'
+        switch_lang: 'English',
+        waiting: 'Menunggu data...',
+        explanation: 'Penjelasan',
+        code_implementation: 'Implementasi Kode',
+        learn_more: 'Pelajari Lebih Lanjut'
     }
 };
 

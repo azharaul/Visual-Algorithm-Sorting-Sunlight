@@ -1,3 +1,4 @@
 flask
 flask-cors
-pycharacterai
+PyCharacterAI
+python-dotenv
