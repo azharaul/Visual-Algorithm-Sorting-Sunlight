@@ -15,8 +15,8 @@ CORS(app)
 # 3. Masukkan Character ID (ID karakter yang ingin digunakan sebagai tutor).
 
 # --- KONFIGURASI MANUAL (JKA PERLU) ---
-MANUAL_TOKEN = "1156934d72bd4942c096fbbc5ef2143f0081932f" # PASTE TOKEN DISINI JIKA TIDAK MAU PAKAI ENV
-MANUAL_CHAR_ID = "eWxQEIjF9r6nNjyQG2L5GsIpkD1J12nIbSPQIbKXNL0" # PASTE CHARACTER ID DISINI
+MANUAL_TOKEN = "" # PASTE TOKEN DISINI JIKA TIDAK MAU PAKAI ENV
+MANUAL_CHAR_ID = "" # PASTE CHARACTER ID DISINI
 # --------------------------------------
 
 # Global variable to store active chat session
