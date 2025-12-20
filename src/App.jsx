@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLanguage } from "./context/LanguageContext";
-import AIChatPanel from "./components/AIChatPanel";
+
 import { generateSelectionSortSteps } from "./algorithms/selectionSortSteps";
 import { generateQuickSortSteps } from "./algorithms/quickSortSteps";
 import { generateHeapSortSteps } from "./algorithms/heapSortSteps";
@@ -11,9 +11,7 @@ import AlgorithmSidebar from "./components/AlgorithmSidebar";
 import AlgorithmInfoPanel from "./components/AlgorithmInfoPanel";
 
 // ============================================
-// Configuration
-// ============================================
-const API_BASE_URL = import.meta.env.VITE_API_URL || "https://chat.breakdownaz.my.id";
+
 
 function App() {
     // ============================================
@@ -26,65 +24,11 @@ function App() {
     const { t, toggleLanguage, language } = useLanguage();
     const [speed, setSpeed] = useState(500);
     const [algorithm, setAlgorithm] = useState("selection");
-    const [aiExplanation, setAiExplanation] = useState("");
-    const [isWaitingForAI, setIsWaitingForAI] = useState(false);
+
     const [infoPanelOpen, setInfoPanelOpen] = useState(false);
     const [selectedInfoAlgo, setSelectedInfoAlgo] = useState("selection");
 
-    // ============================================
-    // AI Integration
-    // ============================================
-    const fetchAIExplanation = useCallback(async (stepData) => {
-        setIsWaitingForAI(true);
-        setAiExplanation("");
 
-        try {
-            const res = await fetch(`${API_BASE_URL}/explain_step`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    algorithm: algorithm,
-                    step: stepData
-                })
-            });
-
-            if (!res.ok) {
-                throw new Error(`Server error: ${res.status}`);
-            }
-
-            const data = await res.json();
-            setAiExplanation(data.explanation || data.error || "No response");
-        } catch (err) {
-            console.error("AI Explanation Error:", err);
-            setAiExplanation("⚠️ Gagal terhubung ke AI. Pastikan server berjalan.");
-        } finally {
-            setIsWaitingForAI(false);
-        }
-    }, [algorithm]);
-
-    const handleUserChat = useCallback(async (message) => {
-        try {
-            const res = await fetch(`${API_BASE_URL}/chat`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    algorithm: algorithm,
-                    step: steps[currentStep] || {},
-                    message: message
-                })
-            });
-
-            if (!res.ok) {
-                throw new Error(`Server error: ${res.status}`);
-            }
-
-            const data = await res.json();
-            return data.response || data.error || "No response";
-        } catch (err) {
-            console.error("Chat Error:", err);
-            return "⚠️ Gagal menghubungi AI. Coba lagi nanti.";
-        }
-    }, [algorithm, steps, currentStep]);
 
     // ============================================
     // Algorithm Execution
@@ -111,7 +55,7 @@ function App() {
             setSteps(generatedSteps);
             setCurrentStep(0);
             setIsPlaying(false);
-            setAiExplanation("");
+
         } catch (error) {
             console.error("Error generating steps:", error);
             alert("Error generating steps. Please check the algorithm implementation.");
@@ -125,22 +69,10 @@ function App() {
         let interval;
 
         if (isPlaying && currentStep < steps.length - 1) {
-            if (speed === 'AI') {
-                // AI Mode: Fetch explanation then wait
-                if (!isWaitingForAI && steps[currentStep] && !aiExplanation) {
-                    fetchAIExplanation(steps[currentStep]);
-                } else if (!isWaitingForAI && aiExplanation) {
-                    interval = setTimeout(() => {
-                        setAiExplanation("");
-                        setCurrentStep((prev) => prev + 1);
-                    }, 4000);
-                }
-            } else {
-                // Normal Speed Mode
-                interval = setInterval(() => {
-                    setCurrentStep((prev) => prev + 1);
-                }, speed);
-            }
+            // Normal Speed Mode
+            interval = setInterval(() => {
+                setCurrentStep((prev) => prev + 1);
+            }, speed);
         }
 
         return () => {
@@ -149,7 +81,7 @@ function App() {
                 clearTimeout(interval);
             }
         };
-    }, [isPlaying, currentStep, steps, speed, isWaitingForAI, aiExplanation, fetchAIExplanation]);
+    }, [isPlaying, currentStep, steps, speed]);
 
     const step = steps[currentStep];
 
@@ -217,17 +149,7 @@ function App() {
                 {/* Steps Log */}
                 {step && <StepsLog message={step.message} />}
 
-                {/* AI Chat Panel */}
-                {speed === 'AI' && (
-                    <AIChatPanel
-                        displayedExplanation={aiExplanation}
-                        isWaiting={isWaitingForAI}
-                        onUserMessage={async (msg) => {
-                            setIsPlaying(false);
-                            return await handleUserChat(msg);
-                        }}
-                    />
-                )}
+
 
                 {/* Playback Controls */}
                 {steps.length > 0 && (
@@ -329,15 +251,7 @@ function App() {
                                         {s === 1000 ? '1x' : s === 500 ? '2x' : s === 200 ? '4x' : 'MAX'}
                                     </button>
                                 ))}
-                                <button
-                                    onClick={() => setSpeed('AI')}
-                                    className={`px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-md text-[10px] sm:text-xs font-bold transition-all ${speed === 'AI'
-                                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md'
-                                        : 'text-blue-300 hover:text-white'
-                                        }`}
-                                >
-                                    AI
-                                </button>
+
                             </div>
                         </div>
 

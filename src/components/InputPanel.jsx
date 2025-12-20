@@ -96,6 +96,7 @@ export default function InputPanel({ onRun }) {
                         >
                             <option value="bar" className="bg-slate-800 text-white">{t('bar_chart')}</option>
                             <option value="array" className="bg-slate-800 text-white">{t('array_view')}</option>
+                            <option value="table" className="bg-slate-800 text-white">{t('table_view')}</option>
                             <option value="graph" className="bg-slate-800 text-white">{t('graph_bubble')}</option>
                         </select>
                         <div className="absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2 pointer-events-none text-blue-300">

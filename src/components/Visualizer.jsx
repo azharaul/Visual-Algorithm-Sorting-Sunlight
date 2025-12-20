@@ -295,14 +295,58 @@ export default function Visualizer({ step, layout, speed = 1 }) {
                         })}
                     </svg>
                 </div>
-            ) : (
+            ) : layout === "array" ? (
                 /* ARRAY MODE */
                 <div className="flex gap-2 md:gap-4 justify-center mt-4 md:mt-6 flex-wrap relative z-10 px-2">
                     {arrayPositions.map((item, visIdx) => (
                         <AnimatedArrayCard key={`${item.index}-${visIdx}`} itemData={item} visualIndex={visIdx} />
                     ))}
                 </div>
-            )}
+            ) : layout === "table" ? (
+                /* TABLE MODE */
+                <div className="overflow-x-auto w-full flex justify-center mt-4 relative z-10">
+                    <table className="w-full max-w-4xl border-collapse text-left text-sm md:text-base">
+                        <thead>
+                            <tr className="border-b border-white/10">
+                                <th className="p-3 font-semibold text-blue-200">Index</th>
+                                <th className="p-3 font-semibold text-blue-200">Value</th>
+                                <th className="p-3 font-semibold text-blue-200">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {array.map((value, index) => {
+                                let rowClass = "border-b border-white/5 transition-colors duration-300";
+                                let stateText = "Idle";
+                                let stateColor = "text-white/50";
+
+                                if (index === minIndex || index === largest) {
+                                    rowClass += " bg-yellow-500/20";
+                                    stateText = index === minIndex ? "Min Element" : "Largest";
+                                    stateColor = "text-yellow-300";
+                                } else if (index === i) {
+                                    rowClass += " bg-emerald-500/20";
+                                    stateText = "Current (i)";
+                                    stateColor = "text-emerald-300";
+                                } else if (index === j || index === pivotIndex) {
+                                    rowClass += " bg-rose-500/20";
+                                    stateText = index === pivotIndex ? "Pivot" : "Compare (j)";
+                                    stateColor = "text-rose-300";
+                                }
+
+                                return (
+                                    <tr key={index} className={rowClass}>
+                                        <td className="p-3 font-mono text-white/70">{index}</td>
+                                        <td className="p-3 font-bold text-white">{value}</td>
+                                        <td className={`p-3 font-medium ${stateColor}`}>
+                                            {stateText}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            ) : null}
         </div>
     );
 }
