@@ -1,121 +1,78 @@
-# 🌟 Visual Algorithm Sorting - Sunlight
+# 🌟 Sorting Visualizer - Sunlight
 
-Aplikasi visualisasi algoritma sorting interaktif dengan dukungan AI Tutor.
+An interactive and beautiful sorting algorithm visualizer built with React. Explore how different algorithms work through various visualization modes and real-time step monitoring.
 
-## ✨ Fitur
+## ✨ Features
 
-- **3 Algoritma Sorting**: Selection Sort, Quick Sort, Heap Sort
-- **3 Mode Visualisasi**: Bar Chart, Array View, Graph Bubble
-- **AI Tutor (SunBot)**: Penjelasan real-time dalam Bahasa Indonesia
-- **Multibahasa**: Dukungan Bahasa Indonesia & English
-- **Responsif**: Optimal di semua ukuran layar
+- **3 Powerful Algorithms**: 
+  - **Selection Sort**: Simple and intuitive.
+  - **Quick Sort**: Highly efficient divide-and-conquer.
+  - **Heap Sort**: Robust comparison-based sorting using heaps.
+  
+- **4 Interactive Visualization Modes**:
+  - 📊 **Bar Chart**: Classic positional height visualization.
+  - 🧩 **Array View**: Card-based positional tracking.
+  - 📉 **Graph Bubble**: Modern SVG-based bubble charts with smooth animations.
+  - 📋 **Table View**: Detailed step-by-step list of indices and values.
 
-## 🚀 Quick Start
+- **Dynamic Controls**:
+  - ⏩ **Speed Adjustment**: Control animation speed from 0.5x to MAX.
+  - ⏯️ **Playback Control**: Step forward, step backward, or play/pause.
+  - 🌐 **Multilingual Support**: Switch seamlessly between **English** and **Bahasa Indonesia**.
+  - 📝 **Steps Log**: Real-time descriptions of every swap and comparison.
 
-### Frontend (React + Vite)
+- **Responsive Design**: Premium dark-mode UI that works perfectly on desktops, tablets, and mobile devices.
 
-```bash
-# Install dependencies
-npm install
+## 🚀 Getting Started
 
-# Run development server
-npm run dev
+### Prerequisites
 
-# Build for production
-npm run build
-```
+- [Node.js](https://nodejs.org/) (v16 or newer)
+- npm or yarn
 
-### Backend (Python Flask)
+### Installation
 
-```bash
-# Masuk ke folder server
-cd server
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/azharaul/Visual-Algorithm-Sorting-Sunlight.git
+   cd sorting-visualizer
+   ```
 
-# Buat virtual environment
-python -m venv .venv
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-# Aktifkan virtual environment
-# Windows:
-.\.venv\Scripts\Activate
-# Linux/Mac:
-source .venv/bin/activate
+3. **Run development server**:
+   ```bash
+   npm run dev
+   ```
 
-# Install dependencies
-pip install -r requirements.txt
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
 
-# Copy dan konfigurasi environment
-cp .env.example .env
-# Edit .env dengan token Character.AI kamu
+## 📁 Project Structure
 
-# Jalankan server
-python app.py
-```
-
-## ⚙️ Konfigurasi
-
-### Frontend (.env)
-
-```env
-VITE_API_URL=https://your-api-domain.com
-```
-
-### Backend (server/.env)
-
-```env
-CAI_TOKEN=your_character_ai_token
-CAI_CHAR_ID=your_character_id
-FLASK_PORT=5001
-FLASK_DEBUG=true
-```
-
-## 🔐 Mendapatkan Token Character.AI
-
-1. Buka [Character.AI](https://character.ai)
-2. Login ke akun kamu
-3. Buka Developer Tools (F12)
-4. Pergi ke tab Application > Cookies
-5. Cari cookie bernama `web-next-auth` - itu adalah token kamu
-6. Untuk Character ID, buka chat dengan karakter dan lihat URL-nya
-
-## 🌐 Deployment
-
-### Frontend
-Upload folder `dist/` (hasil `npm run build`) ke hosting statis seperti:
-- Cloudflare Pages
-- Vercel
-- Netlify
-- GitHub Pages
-
-### Backend
-Deploy folder `server/` ke:
-- Railway
-- Render
-- Heroku
-- VPS dengan Cloudflare Tunnel
-
-## 📁 Struktur Project
-
-```
+```text
 ├── src/
-│   ├── algorithms/          # Implementasi sorting
-│   ├── components/          # React components
-│   ├── context/             # React context (i18n)
-│   ├── App.jsx              # Main app
+│   ├── algorithms/          # Sorting algorithm implementations & step generators
+│   ├── components/          # Reusable UI components
+│   │   └── visualizers/     # Modular view components (Bar, Graph, Array, Table)
+│   ├── context/             # Multi-language (i18n) context
+│   ├── App.jsx              # Main application logic
 │   └── main.jsx             # Entry point
-├── server/
-│   ├── app.py               # Flask server
-│   ├── requirements.txt     # Python dependencies
-│   ├── .env                 # Environment variables
-│   └── .env.example         # Template
-├── .env                     # Frontend env
-├── .env.example             # Frontend env template
-└── .gitignore               # Git ignore rules
+├── public/                 # Static assets
+└── index.html              # HTML template
 ```
 
-## 👥 Tim Sunlight
+## 👥 Sunlight Team
 
-Dibuat dengan ❤️ oleh Tim Sunlight untuk pembelajaran algoritma sorting.
+Crafted with ❤️ by **Sunlight Team** for algorithm education and interactive learning:
 
-## 📄 License
+- **Azhar Aulia Priatna** (NIM: 1402024013)
+- **Aidan Pitra Habibie** (NIM: 1402024006)
 
-MIT License
+---
+© 2025 Sunlight Team. Licensed under the MIT License.
