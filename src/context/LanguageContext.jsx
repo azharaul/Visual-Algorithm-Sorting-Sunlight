@@ -23,7 +23,17 @@ const translations = {
         waiting: 'Waiting for data...',
         explanation: 'Explanation',
         code_implementation: 'Code Implementation',
-        learn_more: 'Learn More'
+        learn_more: 'Learn More',
+
+        // Landing Page
+        landing_title: 'Sorting Algorithms Visualized',
+        landing_subtitle: 'Experience the beauty of algorithms through interactive visualization',
+        landing_desc: 'Explore Selection Sort, Quick Sort, and Heap Sort with our premium visualizer. Understand complex logic with ease.',
+        get_started: 'Get Started',
+        meet_team: 'Meet the Creator',
+        id_1: '1402024013',
+        id_2: '1402024006',
+        team_role: 'Sunlight Team'
     },
     id: {
         title: 'Visualisasi Algoritma Sorting',
@@ -47,7 +57,17 @@ const translations = {
         waiting: 'Menunggu data...',
         explanation: 'Penjelasan',
         code_implementation: 'Implementasi Kode',
-        learn_more: 'Pelajari Lebih Lanjut'
+        learn_more: 'Pelajari Lebih Lanjut',
+
+        // Landing Page
+        landing_title: 'Visualisasi Algoritma Sorting',
+        landing_subtitle: 'Rasakan keindahan algoritma melalui visualisasi interaktif',
+        landing_desc: 'Jelajahi Selection Sort, Quick Sort, dan Heap Sort dengan visualizer premium kami. Pahami logika kompleks dengan mudah.',
+        get_started: 'Mulai Sekarang',
+        meet_team: 'Temui Pembuat',
+        id_1: '1402024013',
+        id_2: '1402024006',
+        team_role: 'Tim Sunlight'
     }
 };
 

@@ -55,30 +55,45 @@ export default function GraphView({ normalizedArray, maxValue, graphHeight, grap
                     );
                 })}
 
+                {/* Connecting Lines */}
+                <path
+                    d={normalizedArray.map((item, index) => {
+                        const x = xStart + (index / (normalizedArray.length - 1 || 1)) * graphWidth;
+                        const y = yStart - (item.value / maxValue) * graphHeight;
+                        return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
+                    }).join(' ')}
+                    fill="none"
+                    stroke="rgba(255, 255, 255, 0.3)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    style={{ transition: 'd 0.3s ease' }}
+                />
+
                 {/* Animated Bubbles */}
                 {normalizedArray.map((item, index) => {
-                    const { fillColor, glowColor, zIndex } = getItemProps(index); 
-                    
+                    const { fillColor, glowColor, zIndex } = getItemProps(index);
+
                     // Calculate Target Position
                     const x = xStart + (index / (normalizedArray.length - 1 || 1)) * graphWidth;
                     const y = yStart - (item.value / maxValue) * graphHeight;
                     const radius = Math.max(minBubbleRadius, (item.value / maxValue) * maxBubbleRadius);
 
                     return (
-                        <g 
-                            key={item.id} 
-                            style={{ 
-                                transform: `translate(${x}px, ${y}px)`, 
+                        <g
+                            key={item.id}
+                            style={{
+                                transform: `translate(${x}px, ${y}px)`,
                                 ...transitionStyle,
                             }}
                         >
                             {/* Line to bottom - Opacity transition */}
-                            <line 
-                                x1={0} y1={0} 
+                            <line
+                                x1={0} y1={0}
                                 x2={0} y2={yStart - y} // Distance to bottom
                                 stroke="rgba(255,255,255,0.1)" strokeWidth="1" strokeDasharray="4,4"
                             />
-                            
+
                             <g filter="url(#softGlow)">
                                 <circle cx={0} cy={0} r={radius + 8} fill={glowColor} opacity="0.15" />
                                 <circle cx={0} cy={0} r={radius} fill={fillColor} opacity="0.9" />

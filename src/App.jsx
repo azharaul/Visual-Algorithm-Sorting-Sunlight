@@ -10,6 +10,8 @@ import StepsLog from "./components/StepsLog";
 import AlgorithmSidebar from "./components/AlgorithmSidebar";
 import AlgorithmInfoPanel from "./components/AlgorithmInfoPanel";
 
+import LandingPage from "./components/LandingPage";
+
 // ============================================
 
 
@@ -17,6 +19,7 @@ function App() {
     // ============================================
     // State Management
     // ============================================
+    const [showLanding, setShowLanding] = useState(true);
     const [steps, setSteps] = useState([]);
     const [currentStep, setCurrentStep] = useState(0);
     const [layout, setLayout] = useState("bar");
@@ -88,8 +91,22 @@ function App() {
     // ============================================
     // Render
     // ============================================
+    if (showLanding) {
+        return <LandingPage onStart={() => setShowLanding(false)} />;
+    }
+
     return (
-        <div className="min-h-screen pt-6 sm:pt-8 md:pt-12 pb-32 sm:pb-36 md:pb-40 px-3 sm:px-4 md:px-8 flex flex-col items-center">
+        <div className="min-h-screen pt-6 sm:pt-8 md:pt-12 pb-32 sm:pb-36 md:pb-40 px-3 sm:px-4 md:px-8 flex flex-col items-center animate-fade-in">
+            {/* Back to Home Button */}
+            <button
+                onClick={() => setShowLanding(true)}
+                className="fixed top-3 left-3 sm:top-4 sm:left-4 md:top-8 md:left-8 bg-white/10 hover:bg-white/20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm text-blue-200 font-bold backdrop-blur-sm border border-white/10 transition-all z-50 flex items-center gap-2"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span className="hidden sm:inline">Home</span>
+            </button>
             {/* Header */}
             <header className="w-full max-w-5xl mb-4 md:mb-6">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-1
