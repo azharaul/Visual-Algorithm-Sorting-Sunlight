@@ -71,8 +71,8 @@ An interactive and beautiful sorting algorithm visualizer built with React. Expl
 
 Crafted with ❤️ by **Sunlight Team** for algorithm education and interactive learning:
 
-- **Azhar Aulia Priatna** (NIM: 1402024013)
-- **Aidan Pitra Habibie** (NIM: 1402024006)
+- **Azhar Aulia Priatna** (1402024013)
+- **Aidan Pitra Habibie** (1402024006)
 
 ---
 © 2025 Sunlight Team. Licensed under the MIT License.
