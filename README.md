@@ -75,4 +75,4 @@ Crafted with ❤️ by **Sunlight Team** for algorithm education and interactive
 - **Aidan Pitra Habibie** (1402024006)
 
 ---
-© 2025 Sunlight Team. Licensed under the MIT License.
+© 2025 Sunlight Team.
