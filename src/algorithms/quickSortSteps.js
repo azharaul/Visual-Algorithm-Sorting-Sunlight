@@ -28,7 +28,8 @@ export function generateQuickSortSteps(inputArray) {
             steps.push({
                 type: "compare",
                 array: [...arr],
-                i: j,
+                j,
+                i,
                 pivotIndex: high,
                 message: {
                     en: `Comparing index ${j} with pivot.`,

@@ -144,7 +144,7 @@ function App() {
                 <InputPanel onRun={handleRun} />
 
                 {/* Visualizer */}
-                <Visualizer step={step} layout={layout} />
+                <Visualizer step={step} layout={layout} speed={speed} />
 
                 {/* Steps Log */}
                 {step && <StepsLog message={step.message} />}

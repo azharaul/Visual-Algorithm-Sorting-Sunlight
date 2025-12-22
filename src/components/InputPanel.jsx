@@ -19,13 +19,37 @@ export default function InputPanel({ onRun }) {
             array = values
                 .split(",")
                 .map((v) => parseInt(v.trim()))
-                .filter((v) => !isNaN(v))
-                .slice(0, size);
+                .filter((v) => !isNaN(v)); // Basic filter, improved below
+            
+            // Validation: Ensure numbers are within reasonable range logic if needed, 
+            // but for now strict filtering of NaNs is good.
+            // Limit to max size to prevent rendering issues
+            if (array.length > 50) {
+                array = array.slice(0, 50);
+                alert("Custom input limited to 50 elements for performance.");
+            }
         }
 
-        // Generate random values if needed
-        while (array.length < size) {
-            array.push(Math.floor(Math.random() * 20) + 1);
+        // Generate random values if needed (fill up to size or if empty)
+        // Logic: if custom values < size, should we fill? 
+        // Current logic: if custom input exists, use it as is (up to size? no, current logic slices).
+        // Let's refine: If custom input is given, use it strictly. If empty, generate random.
+        
+        if (values.trim() !== "") {
+             // If user entered something, use it (clamped to size if needed? or just use what they gave?)
+             // User likely wants exactly what they typed.
+             // But existing code did .slice(0, size). Let's keep that but ensure we have valid data.
+             if (array.length === 0) {
+                 // User entered garbage
+                 alert("Invalid input. Generating random array.");
+                 // Fallthrough to random generation
+             }
+        }
+
+        if (array.length === 0) {
+             while (array.length < size) {
+                array.push(Math.floor(Math.random() * 50) + 1); // Increased range for better visuals
+            }
         }
 
         onRun(array, layout);
