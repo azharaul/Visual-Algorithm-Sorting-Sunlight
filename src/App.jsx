@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage } from "./context/LanguageContext";
 
 import { generateSelectionSortSteps } from "./algorithms/selectionSortSteps";
@@ -9,6 +9,7 @@ import Visualizer from "./components/Visualizer";
 import StepsLog from "./components/StepsLog";
 import AlgorithmSidebar from "./components/AlgorithmSidebar";
 import AlgorithmInfoPanel from "./components/AlgorithmInfoPanel";
+import StatisticsPanel from "./components/StatisticsPanel";
 
 import LandingPage from "./components/LandingPage";
 
@@ -24,7 +25,7 @@ function App() {
     const [currentStep, setCurrentStep] = useState(0);
     const [layout, setLayout] = useState("bar");
     const [isPlaying, setIsPlaying] = useState(false);
-    const { t, toggleLanguage, language } = useLanguage();
+    const { t, toggleLanguage } = useLanguage();
     const [speed, setSpeed] = useState(500);
     const [algorithm, setAlgorithm] = useState("selection");
 
@@ -39,20 +40,33 @@ function App() {
     const handleRun = (array, selectedLayout) => {
         try {
             setLayout(selectedLayout);
+
+            // Normalize array to ensure every item is an object with a unique ID
+            // This is crucial for animations (reordering) to work correctly
+            const normalizedArray = array.map((item, index) => {
+                const uniqueId = typeof item === 'object' ? (item.id || `obj-${index}-${Date.now()}`) : `val-${item}-${index}-${Date.now()}`;
+
+                if (typeof item === 'object') {
+                    return { ...item, id: uniqueId };
+                } else {
+                    return { value: item, id: uniqueId, isPrimitive: true };
+                }
+            });
+
             let generatedSteps;
 
             switch (algorithm) {
                 case "selection":
-                    generatedSteps = generateSelectionSortSteps(array);
+                    generatedSteps = generateSelectionSortSteps(normalizedArray);
                     break;
                 case "quick":
-                    generatedSteps = generateQuickSortSteps(array);
+                    generatedSteps = generateQuickSortSteps(normalizedArray);
                     break;
                 case "heap":
-                    generatedSteps = generateHeapSortSteps(array);
+                    generatedSteps = generateHeapSortSteps(normalizedArray);
                     break;
                 default:
-                    generatedSteps = generateSelectionSortSteps(array);
+                    generatedSteps = generateSelectionSortSteps(normalizedArray);
             }
 
             setSteps(generatedSteps);
@@ -165,6 +179,15 @@ function App() {
 
                 {/* Steps Log */}
                 {step && <StepsLog message={step.message} />}
+
+                {/* Statistics Panel */}
+                {step && steps.length > 0 && (
+                    <StatisticsPanel
+                        stats={step.stats}
+                        originalData={steps[0]?.array}
+                        finalData={steps[steps.length - 1]?.array}
+                    />
+                )}
 
 
 

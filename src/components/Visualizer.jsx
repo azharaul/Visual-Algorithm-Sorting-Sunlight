@@ -5,24 +5,31 @@ import ArrayView from './visualizers/ArrayView';
 import TableView from './visualizers/TableView';
 
 export default function Visualizer({ step, layout, speed = 1 }) {
-    if (!step) return null;
+    const array = step ? step.array : [];
+    const i = step ? step.i : -1;
+    const j = step ? step.j : -1;
+    const minIndex = step ? step.minIndex : -1;
+    const pivotIndex = step ? step.pivotIndex : -1;
+    const largest = step ? step.largest : -1;
 
-    const { array, i = -1, j = -1, minIndex = -1, pivotIndex = -1, largest = -1 } = step;
+    // Adapt to data format (handle both objects {value, id} and legacy numbers)
+    const normalizedArray = useMemo(() => {
+        if (!array) return [];
+        return array.map((item, idx) => {
+            // Because App.jsx now normalizes everything to have an ID, we can trust item.id
+            if (typeof item === 'object' && item !== null) {
+                return item;
+            }
+            // Fallback just in case, but should not be reached with new App.jsx logic
+            return { value: item, id: `fallback-${idx}` };
+        });
+    }, [array]);
+
+    if (!step) return null;
 
     if (!array || array.length === 0) {
         return <div className="text-white">Waiting for data...</div>;
     }
-
-    // Adapt to data format (handle both objects {value, id} and legacy numbers)
-    const normalizedArray = useMemo(() => {
-        return array.map((item, idx) => {
-            if (typeof item === 'object' && item !== null) {
-                return item;
-            }
-            // Fallback for plain numbers: no animation (jump) because ID changes with index
-            return { value: item, id: `legacy-${idx}` };
-        });
-    }, [array]);
 
     const maxValue = Math.max(...normalizedArray.map(item => item.value));
     const barHeight = 250;
@@ -45,7 +52,7 @@ export default function Visualizer({ step, layout, speed = 1 }) {
     // Transition Speed Logic
     // Allow slightly faster transition than the interval to prevent lag
     const transitionDuration = Math.max(50, speed * 0.9);
-    
+
     // CSS Transition String
     const transitionStyle = {
         transition: `all ${transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1)` // Smooth ease-in-out
@@ -90,7 +97,7 @@ export default function Visualizer({ step, layout, speed = 1 }) {
 
             {/* Render proper view based on layout */}
             {layout === "bar" && (
-                <BarView 
+                <BarView
                     normalizedArray={normalizedArray}
                     maxValue={maxValue}
                     barHeight={barHeight}
@@ -102,7 +109,7 @@ export default function Visualizer({ step, layout, speed = 1 }) {
             )}
 
             {layout === "graph" && (
-                <GraphView 
+                <GraphView
                     normalizedArray={normalizedArray}
                     maxValue={maxValue}
                     graphHeight={graphHeight}
@@ -118,9 +125,9 @@ export default function Visualizer({ step, layout, speed = 1 }) {
                     getItemProps={getItemProps}
                 />
             )}
-            
+
             {layout === "array" && (
-                <ArrayView 
+                <ArrayView
                     normalizedArray={normalizedArray}
                     transitionStyle={transitionStyle}
                     transitionDuration={transitionDuration}
@@ -129,7 +136,7 @@ export default function Visualizer({ step, layout, speed = 1 }) {
             )}
 
             {layout === "table" && (
-                <TableView 
+                <TableView
                     normalizedArray={normalizedArray}
                     getItemProps={getItemProps}
                 />

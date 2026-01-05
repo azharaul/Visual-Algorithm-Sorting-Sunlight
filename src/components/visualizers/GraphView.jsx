@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function GraphView({ normalizedArray, maxValue, graphHeight, graphWidth, xStart, yStart, minBubbleRadius, maxBubbleRadius, svgViewBoxWidth, svgViewBoxHeight, itemSpacing, transitionStyle, getItemProps }) {
+export default function GraphView({ normalizedArray, maxValue, graphHeight, graphWidth, xStart, yStart, minBubbleRadius, maxBubbleRadius, svgViewBoxWidth, svgViewBoxHeight, transitionStyle, getItemProps }) {
     return (
         <div className="overflow-x-auto w-full flex justify-center h-full">
             <svg
@@ -72,7 +72,7 @@ export default function GraphView({ normalizedArray, maxValue, graphHeight, grap
 
                 {/* Animated Bubbles */}
                 {normalizedArray.map((item, index) => {
-                    const { fillColor, glowColor, zIndex } = getItemProps(index);
+                    const { fillColor, glowColor } = getItemProps(index);
 
                     // Calculate Target Position
                     const x = xStart + (index / (normalizedArray.length - 1 || 1)) * graphWidth;

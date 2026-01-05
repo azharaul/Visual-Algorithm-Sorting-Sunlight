@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function BarView({ normalizedArray, maxValue, barHeight, transitionStyle, transitionDuration, getItemProps, durationClass }) {
+export default function BarView({ normalizedArray, maxValue, transitionStyle, getItemProps }) {
     return (
         <div className="relative w-full h-full flex items-end px-4 pb-8">
             {normalizedArray.length === 0 ? (

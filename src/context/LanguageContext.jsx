@@ -9,6 +9,9 @@ const translations = {
         speed: 'Speed',
 
         visualization_mode: 'Visualization Mode',
+        data_type: 'Data Type',
+        numbers: 'Numbers',
+        objects: 'Objects',
         bar_chart: 'Bar Chart',
         array_view: 'Array View',
         table_view: 'Table View',
@@ -24,6 +27,22 @@ const translations = {
         explanation: 'Explanation',
         code_implementation: 'Code Implementation',
         learn_more: 'Learn More',
+        array_size: 'Array Size',
+        algorithm: 'Algorithm',
+
+        // Object Mode & Stats
+        enable_object_mode: 'Enable Object Mode (JSON)',
+        generate_template: 'Generate Template',
+        object_students: 'Students (Grades)',
+        object_products: 'Products (Price)',
+        object_employees: 'Employees (Age)',
+
+        // Statistics
+        statistics: 'Statistics',
+        comparisons: 'Comparisons',
+        swaps: 'Swaps',
+        result_preview: 'Result Preview',
+        initial_data: 'Initial Data',
 
         // Landing Page
         landing_title: 'Sorting Algorithms Visualized',
@@ -43,6 +62,9 @@ const translations = {
         speed: 'Kecepatan',
 
         visualization_mode: 'Mode Visualisasi',
+        data_type: 'Tipe Data',
+        numbers: 'Angka',
+        objects: 'Objek',
         bar_chart: 'Diagram Batang',
         array_view: 'Tampilan Array',
         table_view: 'Tampilan Tabel',
@@ -58,6 +80,22 @@ const translations = {
         explanation: 'Penjelasan',
         code_implementation: 'Implementasi Kode',
         learn_more: 'Pelajari Lebih Lanjut',
+        array_size: 'Ukuran Array',
+        algorithm: 'Algoritma',
+
+        // Object Mode & Stats
+        enable_object_mode: 'Aktifkan Mode Objek (JSON)',
+        generate_template: 'Buat Template',
+        object_students: 'Mahasiswa (Nilai)',
+        object_products: 'Barang (Harga)',
+        object_employees: 'Karyawan (Umur)',
+
+        // Statistics
+        statistics: 'Statistik',
+        comparisons: 'Perbandingan',
+        swaps: 'Pertukaran',
+        result_preview: 'Pratinjau Hasil',
+        initial_data: 'Data Awal',
 
         // Landing Page
         landing_title: 'Visualisasi Algoritma Sorting',

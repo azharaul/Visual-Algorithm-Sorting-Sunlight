@@ -15,7 +15,7 @@ const AnimatedArrayCard = ({ item, index, widthPercentage, transitionStyle, tran
             // Simple ease
             const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
             setAnimProgress(ease);
-            if(progress < 1) rafId = requestAnimationFrame(animate);
+            if (progress < 1) rafId = requestAnimationFrame(animate);
         };
         rafId = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(rafId);
@@ -38,13 +38,21 @@ const AnimatedArrayCard = ({ item, index, widthPercentage, transitionStyle, tran
                     rounded-xl ${colorClass} ${scaleClass}
                     flex items-center justify-center shadow-lg border border-white/20
                 `}
-                style={{ transform: `scale(${0.95 + animProgress * 0.05})` }}
+                    style={{ transform: `scale(${0.95 + animProgress * 0.05})` }}
                 >
                     <span className="text-white font-bold text-sm md:text-xl">{item.value}</span>
                 </div>
             </div>
-            <div className="text-center mt-2 text-xs text-blue-200/50 font-mono">
-                {index}
+            <div className="text-center mt-2 text-xs text-blue-200/50 font-mono flex flex-col gap-0.5">
+                <span className="font-bold text-white/80">{item.name || item.label || item.id.replace('legacy-', '#')}</span>
+                {Object.entries(item).map(([key, val]) => {
+                    if (['id', 'value', 'name', 'label'].includes(key)) return null;
+                    return (
+                        <span key={key} className="text-[10px] text-white/40">
+                            {val}
+                        </span>
+                    );
+                })}
             </div>
         </div>
     );
